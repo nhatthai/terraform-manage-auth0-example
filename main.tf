@@ -1,7 +1,8 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source = "hashicorp/azurerm",
+      version = "~> 0.34"
     }
 
     auth0 = {
@@ -11,9 +12,9 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = var.az_resource_group_name
-    storage_account_name = var.az_storage_account_name
-    container_name       = var.az_container_name
+    resource_group_name  = "LearningDeployment"
+    storage_account_name = "tfdevopsstorage"
+    container_name       = "tfstatedevops"
     key                  = "auth0.tfstate"
   }
 }
