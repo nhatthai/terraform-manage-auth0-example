@@ -24,12 +24,12 @@
     ```
     az ad sp create-for-rbac --name tfserviceprincipal
     ```
-    password ==> AZURE_AD_CLIENT_SECRET
-    appId ==> AZURE_AD_CLIENT_ID
-    tenant ==> AZURE_AD_TENANT_ID
-    AZURE_SUBSCRIPTION_ID --> subscription of resource group
+    - password ==> AZURE_AD_CLIENT_SECRET
+    - appId ==> AZURE_AD_CLIENT_ID
+    - tenant ==> AZURE_AD_TENANT_ID
+    - AZURE_SUBSCRIPTION_ID --> subscription of resource group
 
-+ Update $subcription_id and Run
++ Update $subcription_id and set role for service principal
     ```
     ./role.ps1
     ```
@@ -43,7 +43,15 @@
 + terraform init
 + terraform apply
 
-### Reference
+### Results
++ Terraform State File Store in Azure
+
+    ![TFState Azure Store](./images/tfstate-az-store.png)
+
++ Auth0 Single Page Application
+    ![Auth0 SPA Application](./images/SPA-Auth0.png)
+
+### References
 + [Manage Your Auth0 Configuration](https://auth0.com/blog/use-terraform-to-manage-your-auth0-configuration/)
 + [Setting up Auth0 with Terraform](https://hceris.com/setting-up-auth0-with-terraform/)
 + [Push Terraform State File to Azure using GitHub Action](https://thomasthornton.cloud/2021/03/19/deploy-terraform-using-github-actions-into-azure/)

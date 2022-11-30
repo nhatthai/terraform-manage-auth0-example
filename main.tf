@@ -41,7 +41,7 @@ resource "auth0_client" "spa_terraform" {
   name            = "WebAppSPA - ${var.environment}"
   description     = "My Web App Created Through Terraform SPA1"
   app_type        = "spa"
-  callbacks       = ["http://localhost:3000/callback"]
+  callbacks       = ["http://localhost:3000/callback", "http://localhost:4000/callback"]
   allowed_origins = ["http://localhost:3000"]
   allowed_logout_urls  = ["http://localhost:3000"]
   web_origins    = ["http://localhost:3000"]
