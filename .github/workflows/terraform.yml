@@ -34,7 +34,7 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./"
-        args: --backend-config="storage_account_name=${{ STORAGE_ACCOUNT }}" --backend-config="container_name=${{ CONTAINER_NAME }}"
+        args: --backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}" --backend-config="container_name=${{ env.CONTAINER_NAME }}"
 
     - name: 'Terraform Validate'
       uses: hashicorp/terraform-github-actions@master
