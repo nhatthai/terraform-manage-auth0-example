@@ -17,7 +17,7 @@
     az storage account create -n tfdevopsstorage -g LearningDeployment -l koreacentral --sku Standard_LRS
 
     # Create Storage Account Container
-    az storage container create -n tfstatedevops --account-name tfdevopsstorage --auth-mode login
+    az storage container create -n tfstatecontainer-test --account-name tfdevopsstorage --auth-mode login
     ```
 
 + Create credentials
