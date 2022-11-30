@@ -8,7 +8,7 @@ variable "az_storage_account_name" {
   type        = string
 }
 
-varibale "az_container_name" {
+variable "az_container_name" {
     description="Azure Container Name"
     type = string
 }
