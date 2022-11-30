@@ -12,6 +12,11 @@ variable "az_container_name" {
     description="Azure Container Name"
     type = string
 }
+
+variable "arm_access_key" {
+    description="Azure Access Key"
+    type = string
+}
 variable "auth0_client_id" {
     description = "Client Id of Auth0(M2M)"
     type        = string
