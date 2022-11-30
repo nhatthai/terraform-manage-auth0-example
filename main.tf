@@ -33,9 +33,9 @@ provider "azurerm" {
 }
 
 # An Auth0 Client loaded using its ID.
-data "auth0_client" "some-client-by-id" {
-  client_id = "0kOS3T3gjqY7k9A3hbc30Eh1GFA1HotU"
-}
+#data "auth0_client" "some-client-by-id" {
+#  client_id = var.auth0_client_id
+#}
 
 resource "auth0_client" "spa_terraform" {
   name            = "WebAppSPA - ${var.environment}"
@@ -60,17 +60,6 @@ resource "auth0_client" "spa_terraform" {
     infinite_token_lifetime = false
     infinite_idle_token_lifetime = false
   }
-}
-
-resource "auth0_connection" "github" {
-  name = "github-connection"
-  strategy = "github"
-  options {
-    client_id = "0kOS3T3gjqY7k9A3hbc30Eh1GFA1HotU"
-    client_secret = "b4f9BD9-V4bjFwiiKoDpG_4rlvO5I0GbCmBgFM9Ft_iq92cf6mh4APwhHcTOBqX7"
-    scopes = [ "email", "profile", "public_repo", "repo" ]
-  }
-  enabled_clients = [auth0_client.spa_terraform.client_id]
 }
 
 # Output the client id of the created spa app

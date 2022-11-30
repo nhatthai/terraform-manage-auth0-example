@@ -48,3 +48,4 @@
 + [Setting up Auth0 with Terraform](https://hceris.com/setting-up-auth0-with-terraform/)
 + [Push Terraform State File to Azure using GitHub Action](https://thomasthornton.cloud/2021/03/19/deploy-terraform-using-github-actions-into-azure/)
 + [Remote Backend State with Terraform and Azure Storage](https://www.ciraltos.com/remote-backend-state-with-terraform-and-azure-storage/)
++ [Multi environments Azure Deployment with Terraform and GitHub Action ](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450)
