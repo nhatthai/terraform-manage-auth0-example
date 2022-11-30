@@ -32,7 +32,6 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./"
-        args: -var="arm_access_key=${{ secrets.ARM_ACCESS_KEY }}"
 
     - name: 'Terraform Validate'
       uses: hashicorp/terraform-github-actions@master
@@ -40,7 +39,6 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'validate'
         tf_actions_working_dir: "./"
-        args: -var="arm_access_key=${{ secrets.ARM_ACCESS_KEY }}"
 
     - name: 'Terraform Plan'
       uses: hashicorp/terraform-github-actions@master
@@ -48,7 +46,6 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'plan'
         tf_actions_working_dir: "./"
-        args: -var="arm_access_key=${{ secrets.ARM_ACCESS_KEY }}"
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
@@ -56,4 +53,3 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'apply -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}"'
         tf_actions_working_dir: "./"
-        args: -var="arm_access_key=${{ secrets.ARM_ACCESS_KEY }}"

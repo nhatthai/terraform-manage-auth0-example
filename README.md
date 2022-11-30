@@ -7,8 +7,7 @@
 + Create an account & Install Terraform
 + Create an account Auth0
 
-
-### Usage
+### Azure Storage
 + Create Azure Account and Storage
     ```
     # Create Resource Group
@@ -18,7 +17,7 @@
     az storage account create -n tfdevopsstorage -g LearningDeployment -l koreacentral --sku Standard_LRS
 
     # Create Storage Account Container
-    az storage container create -n tfstatedevops --account-name tfdevopsstorage
+    az storage container create -n tfstatedevops --account-name tfdevopsstorage --auth-mode login
     ```
 
 + Create credentials
@@ -30,6 +29,12 @@
     tenant ==> AZURE_AD_TENANT_ID
     AZURE_SUBSCRIPTION_ID --> subscription of resource group
 
++ Update $subcription_id and Run
+    ```
+    ./role.ps1
+    ```
+
+### Usage
 + Create a Machine to Machine application in Auth0
 + You'll need to authorize your new app to call the Auth0 Management API.
 + Select it in the dropdown and then authorize all scopes
