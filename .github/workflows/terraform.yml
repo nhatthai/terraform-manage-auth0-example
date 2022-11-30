@@ -57,6 +57,6 @@ jobs:
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
       with:
-      tf_actions_version: 0.14.8
-      tf_actions_subcommand: 'apply -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}"'
-      tf_actions_working_dir: "./terraform"
+        tf_actions_version: 0.14.8
+        tf_actions_subcommand: 'apply -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}"'
+        tf_actions_working_dir: "./terraform"
