@@ -13,8 +13,6 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "LearningDeployment"
-    storage_account_name = "tfdevopsstorage"
-    container_name       = "tfstatedevops"
     key                  = "auth0.tfstate"
   }
 }
@@ -31,11 +29,6 @@ provider "azurerm" {
   version = "~>2.0"
   features {}
 }
-
-# An Auth0 Client loaded using its ID.
-#data "auth0_client" "some-client-by-id" {
-#  client_id = var.auth0_client_id
-#}
 
 resource "auth0_client" "spa_terraform" {
   name            = "WebAppSPA - ${var.environment}"
