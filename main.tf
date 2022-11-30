@@ -1,13 +1,20 @@
-variable "auth0_domain" {}
-variable "auth0_client_id" {}
-variable "auth0_client_secret" {}
-
 terraform {
   required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+    }
+
     auth0 = {
       source  = "auth0/auth0"
       version = "~> 0.34"
     }
+  }
+
+  backend "azurerm" {
+    resource_group_name  = var.az_resource_group_name
+    storage_account_name = var.az_storage_account_name
+    container_name       = var.az_container_name
+    key                  = "auth0.tfstate"
   }
 }
 
@@ -17,9 +24,20 @@ provider "auth0" {
   client_secret = var.auth0_client_secret
 }
 
+provider "azurerm" {
+  # The "feature" block is required for AzureRM provider 2.x.
+  # If you're using version 1.x, the "features" block is not allowed.
+  version = "~>2.0"
+  features {}
+}
+
+# An Auth0 Client loaded using its ID.
+data "auth0_client" "some-client-by-id" {
+  client_id = "0kOS3T3gjqY7k9A3hbc30Eh1GFA1HotU"
+}
 
 resource "auth0_client" "spa_terraform" {
-  name            = "WebAppSPA1"
+  name            = "WebAppSPA - ${var.environment}"
   description     = "My Web App Created Through Terraform SPA1"
   app_type        = "spa"
   callbacks       = ["http://localhost:3000/callback"]
@@ -41,6 +59,17 @@ resource "auth0_client" "spa_terraform" {
     infinite_token_lifetime = false
     infinite_idle_token_lifetime = false
   }
+}
+
+resource "auth0_connection" "github" {
+  name = "github-connection"
+  strategy = "github"
+  options {
+    client_id = "0kOS3T3gjqY7k9A3hbc30Eh1GFA1HotU"
+    client_secret = "b4f9BD9-V4bjFwiiKoDpG_4rlvO5I0GbCmBgFM9Ft_iq92cf6mh4APwhHcTOBqX7"
+    scopes = [ "email", "profile", "public_repo", "repo" ]
+  }
+  enabled_clients = [auth0_client.spa_terraform.client_id]
 }
 
 # Output the client id of the created spa app
