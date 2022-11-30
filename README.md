@@ -48,10 +48,10 @@
 ### Results
 + Terraform State File Store in Azure
 
-    ![TFState Azure Store](./images/tfstate-az-store.png)
+    ![TFState Azure Store](./images/az-store.png)
 
 + Auth0 Single Page Application
-    ![Auth0 SPA Application](./images/SPA-Auth0.png)
+    ![Auth0 SPA Application](./images/auth0-spa-app.png)
 
 ### References
 + [Manage Your Auth0 Configuration](https://auth0.com/blog/use-terraform-to-manage-your-auth0-configuration/)

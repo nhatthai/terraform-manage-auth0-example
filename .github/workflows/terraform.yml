@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  terraform:
+  terraform-test:
     name: 'Terraform TEST'
     runs-on: ubuntu-latest
     environment: TEST
@@ -72,6 +72,7 @@ jobs:
           -var "environment=${{ env.ENVIRONMENT }}"
 
   terraform-stage:
+    needs: [terraform-test]
     name: 'Terraform STAGE'
     runs-on: ubuntu-latest
     environment: STAGE
