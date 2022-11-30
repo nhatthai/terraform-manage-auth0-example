@@ -3,9 +3,9 @@
 + Store Terraform state files to Azure Storage
 + Using GitHub Action for deployment
 
-### Requirements
-+ Create an account & Install Terraform
-+ Create an account Auth0
+## Requirements
+### Create an account Auth0
+    - Add them into secret GitHub: AUTH0_CLIENT_ID & AUTH0_CLIENT_SECRET
 
 ### Azure Storage
 + Create Azure Account and Storage
@@ -24,6 +24,7 @@
     ```
     az ad sp create-for-rbac --name tfserviceprincipal
     ```
+    Add them into secret GitHub
     - password ==> AZURE_AD_CLIENT_SECRET
     - appId ==> AZURE_AD_CLIENT_ID
     - tenant ==> AZURE_AD_TENANT_ID
@@ -33,6 +34,7 @@
     ```
     ./role.ps1
     ```
+
 
 ### Usage
 + Create a Machine to Machine application in Auth0
