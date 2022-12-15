@@ -85,10 +85,9 @@ jobs:
       shell: bash
       working-directory: "./"
       run: |
-        apt-get install jq
-        Client_Id=$(echo ${{ steps.terraform.outputs.tf_actions_output }} | jq -r '.application_client_id.value')
+        Client_Id=${{ steps.terraform.outputs.application_client_id }}
         echo $Client_Id
-        Client_Secret=$(echo ${{ steps.terraform.outputs.tf_actions_output }} | jq -r '.application_client_secret.value')
+        Client_Secret=${{ steps.terraform.outputs.application_client_secret }}
         echo $Client_Secret
 
   terraform-stage:
