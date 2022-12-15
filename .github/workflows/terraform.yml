@@ -62,6 +62,7 @@ jobs:
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
+      id: terraform
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'apply'
@@ -85,9 +86,9 @@ jobs:
       shell: bash
       working-directory: "./"
       run: |
-        app_client_id=$(terraform output application_client_id)
-        app_client_secret=$(terraform output application_client_secret)
-        echo $app_clien_tid
+        app_client_id=$(steps.terraform.outputs.application_client_id)
+        app_client_secret=$(steps.terraform.outputs.application_client_secret)
+        echo $app_client_id
         echo $app_client_secret
 
   terraform-stage:
