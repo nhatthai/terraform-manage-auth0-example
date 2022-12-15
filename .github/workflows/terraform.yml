@@ -85,14 +85,7 @@ jobs:
       shell: bash
       working-directory: "./"
       run: |
-        app_client_id=$(steps.terraform.outputs.tf_actions_output.application_client_id.value)
-        app_client_secret=$(steps.terraform.outputs.tf_actions_output.application_client_secret.value)
-
-        app_client_id_value=${app_client_id//\"/}
-        app_client_secret_value=${app_client_secret//\"/}
-
-        echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
-        echo "auth0ClientSecret=$app_client_secret_value" >> $GITHUB_OUTPUT
+        echo ${{ steps.terraform.outputs.tf_actions_output  }}
 
   terraform-stage:
     needs: [terraform-test]
