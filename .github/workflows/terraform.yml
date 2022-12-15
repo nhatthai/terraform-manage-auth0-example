@@ -62,7 +62,6 @@ jobs:
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
-      id: terraform
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'apply'
