@@ -56,6 +56,11 @@ resource "auth0_client" "spa_terraform" {
 }
 
 # Output the client id of the created spa app
-output "application_clientid" {
+output "application_client_id" {
   value = auth0_client.spa_terraform.client_id
+}
+
+output "application_client_secret" {
+  value = auth0_client.spa_terraform.client_secret
+  sensitive = true
 }

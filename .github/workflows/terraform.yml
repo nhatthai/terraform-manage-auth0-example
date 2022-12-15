@@ -15,7 +15,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-      STORAGE_ACCOUNT: tfdevopsstorage
+      STORAGE_ACCOUNT: terraformstorageauth0
       CONTAINER_NAME: tfstatecontainer-test
       ENVIRONMENT: TEST
 
@@ -38,6 +38,7 @@ jobs:
         args:
           --backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}"
           --backend-config="container_name=${{ env.CONTAINER_NAME }}"
+          --backend-config="key=${{ env.ENVIRONMENT }}.auth0.tfstate"
           -var "environment=${{ env.ENVIRONMENT }}"
 
     - name: 'Terraform Validate'
@@ -71,6 +72,28 @@ jobs:
           -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}"
           -var "environment=${{ env.ENVIRONMENT }}"
 
+    - name: 'Terraform Output'
+      id: terraform
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.8
+        tf_actions_subcommand: 'output'
+        tf_actions_working_dir: ${{ inputs.working-directory }}
+
+    - name: Store Terraform Output
+      id: terraform_outputs
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        app_client_id=$(terraform output application_client_id)
+        app_client_secret=$(terraform output application_client_secret)
+
+        app_client_id_value=${app_client_id//\"/}
+        app_client_secret_value=${app_client_secret//\"/}
+
+        echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
+        echo "auth0ClientSecret=$app_client_secret_value" >> $GITHUB_OUTPUT
+
   terraform-stage:
     needs: [terraform-test]
     name: 'Terraform STAGE'
@@ -81,7 +104,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-      STORAGE_ACCOUNT: tfdevopsstorage
+      STORAGE_ACCOUNT: terraformstorageauth0
       CONTAINER_NAME: tfstatecontainer-stage
       ENVIRONMENT: STAGE
 
@@ -104,6 +127,7 @@ jobs:
         args:
           --backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}"
           --backend-config="container_name=${{ env.CONTAINER_NAME }}"
+          --backend-config="key=${{ env.ENVIRONMENT }}.auth0.tfstate"
           -var "environment=${{ env.ENVIRONMENT }}"
 
     - name: 'Terraform Validate'

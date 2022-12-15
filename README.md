@@ -14,10 +14,10 @@
     az group create -n LearningDeployment -l koreacentral
 
     # Create Storage Account
-    az storage account create -n tfdevopsstorage -g LearningDeployment -l koreacentral --sku Standard_LRS
+    az storage account create -n terraformstorageauth0 -g LearningDeployment -l koreacentral --sku Standard_LRS
 
     # Create Storage Account Container
-    az storage container create -n tfstatecontainer-test --account-name tfdevopsstorage --auth-mode login
+    az storage container create -n tfstatecontainer-test --account-name terraformstorageauth0 --auth-mode login
     ```
 
 + Create credentials
