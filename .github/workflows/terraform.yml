@@ -85,6 +85,7 @@ jobs:
       id: terraform_outputs
       shell: bash
       run: |
+        terraform init
         app_client_id=$(terraform output application_client_id)
         app_client_secret=$(terraform output application_client_secret)
         echo $app_client_id
