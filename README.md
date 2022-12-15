@@ -1,7 +1,7 @@
 # Auth0 Management with Terraform
 + Manage Auth0 Configuration with Terraform
 + Store Terraform state files to Azure Storage
-+ Using GitHub Action for deployment
++ Using GitHub Actions for deployment
 
 ## Requirements
 ### Create an account Auth0
