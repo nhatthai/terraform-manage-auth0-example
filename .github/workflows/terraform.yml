@@ -82,9 +82,9 @@ jobs:
 
     - name: Store Terraform Output
       id: terraform_outputs
-      shell: bash
       run: |
-        app_client_id=$(echo ${{ steps.terraform.outputs.tf_actions_output }} | jq -r 'application_client_id.value')
+        apt-get install jq
+        app_client_id=$(echo ${{ steps.terraform.outputs.tf_actions_output }} | jq -r '.application_client_id.value')
         echo $app_client_id
         app_client_secret=$(echo ${{ steps.terraform.outputs.tf_actions_output }} | jq -r '.application_client_secret.value')
         echo $app_client_secret
