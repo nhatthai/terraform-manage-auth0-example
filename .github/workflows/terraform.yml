@@ -72,23 +72,23 @@ jobs:
           -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}"
           -var "environment=${{ env.ENVIRONMENT }}"
 
-    - name: 'Terraform Output'
-      id: terraform
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.14.8
-        tf_actions_subcommand: 'output'
-        tf_actions_working_dir: "./"
+    # - name: 'Terraform Output'
+    #   id: terraform
+    #   uses: hashicorp/terraform-github-actions@master
+    #   with:
+    #     tf_actions_version: 0.14.8
+    #     tf_actions_subcommand: 'output'
+    #     tf_actions_working_dir: "./"
 
     - name: Store Terraform Output
       id: terraform_outputs
       shell: bash
       working-directory: "./"
       run: |
-        Client_Id=${{ steps.terraform.outputs.application_client_id }}
-        echo $Client_Id
-        Client_Secret=${{ steps.terraform.outputs.application_client_secret }}
-        echo $Client_Secret
+        app_client_id=$(terraform output application_client_id)
+        app_client_secret=$(terraform output application_client_secret)
+        echo $app_clien_tid
+        echo $app_client_secret
 
   terraform-stage:
     needs: [terraform-test]
