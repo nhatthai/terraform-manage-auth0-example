@@ -55,7 +55,7 @@ jobs:
       run: |
         app_client_id=$(terraform output application_client_id)
         app_client_id_value=${app_client_id//\"/}
-        echo 'auth0ClientId=$app_client_id_value' >> $GITHUB_OUTPUT
+        echo auth0ClientId=$app_client_id_value >> $GITHUB_OUTPUT
 
     - run: echo ${{ steps.terraform_outputs.outputs.auth0ClientId }}
 
