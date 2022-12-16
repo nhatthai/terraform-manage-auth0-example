@@ -43,8 +43,8 @@
 + Open the Settings tab and copy the Domain, Client ID, and Client Secret values - you'll need them in the next step for configuring the Auth0 Provider.
 
 + Pipeline:
-    Test: has Output
-    Stage: NOT Output
+    - Test: has Output
+    - Stage: NOT Output
 
 ### Results
 + Terraform State File Store in Azure
