@@ -53,10 +53,11 @@ jobs:
     - name: Terraform Apply
       shell: bash
       working-directory: '.'
-      run: terraform apply -auto-approve -input=false -var-file="terraform.tfvars" \
-        -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" \
-        -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" \
-        -var "environment=${{ env.ENVIRONMENT }}"
+      run: >
+        terraform apply -auto-approve -input=false -var-file="terraform.tfvars"
+          -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}"
+          -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}"
+          -var "environment=${{ env.ENVIRONMENT }}"
 
     - name: Store Terraform Output
       id: terraform_outputs
