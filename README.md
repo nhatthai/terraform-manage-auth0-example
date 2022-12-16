@@ -41,13 +41,13 @@
 + You'll need to authorize your new app to call the Auth0 Management API.
 + Select it in the dropdown and then authorize all scopes
 + Open the Settings tab and copy the Domain, Client ID, and Client Secret values - you'll need them in the next step for configuring the Auth0 Provider.
-+ terraform login
-+ terraform init
-+ terraform apply
+
++ Pipeline:
+    Test: has Output
+    Stage: NOT Output
 
 ### Results
 + Terraform State File Store in Azure
-
     ![TFState Azure Store](./images/az-store.png)
 
 + Auth0 Single Page Application
