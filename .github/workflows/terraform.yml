@@ -36,30 +36,25 @@ jobs:
     - name: Terraform Init
       shell: bash
       working-directory: '.'
-      run: terraform init -backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}" -backend-config="container_name=${{ env.CONTAINER_NAME }}" -backend-config="key=${{ env.ENVIRONMENT }}.auth0.tfstate" -var "environment=${{ env.ENVIRONMENT }}"
+      run: |
+        terraform init -backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}" -backend-config="container_name=${{ env.CONTAINER_NAME }}" -backend-config="key=${{ env.ENVIRONMENT }}.auth0.tfstate" -var "environment=${{ env.ENVIRONMENT }}"
 
-    - name: Terraform Format
+    - name: Terraform Validate
       shell: bash
       working-directory: '.'
-      run: terraform fmt -check
+      run: terraform validate
 
     - name: Terraform Plan
       shell: bash
       working-directory: '.'
-      run: terraform plan -input=false \
-            -var-file="terraform.tfvars" \
-            -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" \
-            -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" \
-            -var "environment=${{ env.ENVIRONMENT }}"
+      run: |
+        terraform plan -input=false -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}"  -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" -var "environment=${{ env.ENVIRONMENT }}"
 
     - name: Terraform Apply
       shell: bash
       working-directory: '.'
-      run: terraform apply -auto-approve -input=false \
-          -var-file="terraform.tfvars" \
-          -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" \
-          -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" \
-          -var "environment=${{ env.ENVIRONMENT }}"
+      run: |
+        terraform apply -auto-approve -input=false -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" -var "environment=${{ env.ENVIRONMENT }}"
 
     - name: Store Terraform Output
       id: terraform_outputs

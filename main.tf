@@ -2,12 +2,12 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm",
-      version = "~> 2.0"
+      version = "2.98"
     }
 
     auth0 = {
       source  = "auth0/auth0"
-      version = "~> 0.34"
+      version = "0.34"
     }
   }
 
