@@ -22,11 +22,9 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.3.6
 
     - name: Terraform Init
       shell: bash
@@ -56,7 +54,8 @@ jobs:
       working-directory: '.'
       run: |
         app_client_id=$(terraform output application_client_id)
-        echo "auth0ClientId=$app_client_id" >> $GITHUB_OUTPUT
+        app_client_id_value=${app_client_id//\"/}
+        echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
 
   terraform-stage:
     needs: [terraform-test]
