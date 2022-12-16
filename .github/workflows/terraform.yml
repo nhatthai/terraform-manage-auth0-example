@@ -53,8 +53,10 @@ jobs:
     - name: Terraform Apply
       shell: bash
       working-directory: '.'
-      run: |
-        terraform apply -auto-approve -input=false -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" -var "environment=${{ env.ENVIRONMENT }}"
+      run: terraform apply -auto-approve -input=false -var-file="terraform.tfvars" \
+        -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" \
+        -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" \
+        -var "environment=${{ env.ENVIRONMENT }}"
 
     - name: Store Terraform Output
       id: terraform_outputs
@@ -62,16 +64,6 @@ jobs:
       working-directory: '.'
       run: |
         app_client_id=$(terraform output application_client_id)
-        app_client_secret=$(terraform output application_client_secret)
-        app_domain=$(terraform output application_domain)
-
-        app_client_id_value=${app_client_id//\"/}
-        app_client_secret_value=${app_client_secret//\"/}
-        app_domain_value=${app_domain//\"/}
-
-        echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
-        echo "auth0ClientSecret=$app_client_secret_value" >> $GITHUB_OUTPUT
-        echo "auth0Domain=$app_domain_value" >> $GITHUB_OUTPUT
 
   terraform-stage:
     needs: [terraform-test]
