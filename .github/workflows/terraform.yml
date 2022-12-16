@@ -56,6 +56,7 @@ jobs:
       working-directory: '.'
       run: |
         app_client_id=$(terraform output application_client_id)
+        echo "auth0ClientId=$app_client_id" >> $GITHUB_OUTPUT
 
   terraform-stage:
     needs: [terraform-test]
