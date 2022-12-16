@@ -37,7 +37,7 @@ jobs:
       shell: bash
       working-directory: '.'
       run: terraform init  \
-        --backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}"" \
+        --backend-config="storage_account_name=${{ env.STORAGE_ACCOUNT }}" \
         --backend-config="container_name=${{ env.CONTAINER_NAME }}" \
         --backend-config="key=${{ env.ENVIRONMENT }}.auth0.tfstate" \
         -var "environment=${{ env.ENVIRONMENT }}"
