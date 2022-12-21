@@ -25,6 +25,8 @@ jobs:
       uses: actions/checkout@v3
 
     - uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
 
     - name: Terraform Init
       shell: bash
@@ -58,7 +60,7 @@ jobs:
         app_client_id_value=${app_client_id_value//$'\n'/\\n}
         echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
 
-    - run: echo ${{ steps.terraform_outputs.outputs.auth0ClientId }}
+    - run: echo "${{ steps.terraform_outputs.outputs.auth0ClientId }}"
 
   terraform-stage:
     needs: [terraform-test]
