@@ -60,6 +60,7 @@ jobs:
       run: |
         app_client_id=$(terraform output application_client_id)
         app_client_id_value=${app_client_id//\"/}
+        app_client_id_value=${app_client_id_value//$'\n'/\\n}
         echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
