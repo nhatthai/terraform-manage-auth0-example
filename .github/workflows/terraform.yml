@@ -48,14 +48,14 @@ jobs:
       working-directory: '.'
       run: terraform apply -auto-approve -input=false -var-file="terraform.tfvars" -var "auth0_client_id=${{ secrets.AUTH0_CLIENT_ID }}" -var "auth0_client_secret=${{ secrets.AUTH0_CLIENT_SECRET }}" -var "environment=${{ env.ENVIRONMENT }}"
 
-    - name: Store Terraform Output
+    - name: Terraform Output
       id: terraform_outputs
       shell: bash
       working-directory: '.'
       run: |
         app_client_id=$(terraform output application_client_id)
         app_client_id_value=${app_client_id//\"/}
-        echo auth0ClientId=$app_client_id_value >> $GITHUB_OUTPUT
+        echo "auth0ClientId=$app_client_id_value" >> $GITHUB_OUTPUT
 
     - run: echo ${{ steps.terraform_outputs.outputs.auth0ClientId }}
 
